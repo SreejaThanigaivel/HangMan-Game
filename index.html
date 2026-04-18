@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <!-- Importing a beautiful modern font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="A beautiful and interactive Hangman game built with HTML, CSS, and Javascript.">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Main header for the application -->
+        <header>
+            <h1>✦ H A N G M A N ✦</h1>
+            <p class="subtitle">Can you guess the hidden word?</p>
+        </header>
+
+        <main class="game-display">
+            <!-- Hangman SVG Graphics -->
+            <div class="hangman-graphics">
+                <!-- Using an inline SVG for clean, scalable, hardware-accelerated drawing -->
+                <svg viewBox="0 0 200 250" id="hangman-svg" aria-label="Hangman Graphic">
+                    <!-- Base & Gallows (These are always visible) -->
+                    <g class="gallows">
+                        <line x1="20" y1="230" x2="180" y2="230" stroke="#e0e0e0" stroke-width="4"/>
+                        <line x1="60" y1="230" x2="60" y2="20" stroke="#e0e0e0" stroke-width="4"/>
+                        <line x1="60" y1="20" x2="140" y2="20" stroke="#e0e0e0" stroke-width="4"/>
+                        <line x1="140" y1="20" x2="140" y2="50" stroke="#e0e0e0" stroke-width="4"/>
+                    </g>
+                    <!-- Body parts, individually toggled via CSS/JS classes -->
+                    <!-- 1. Head -->
+                    <circle id="part-0" class="body-part" cx="140" cy="70" r="20" stroke="#ff6b6b" stroke-width="4" fill="none"/>
+                    <!-- 2. Body -->
+                    <line id="part-1" class="body-part" x1="140" y1="90" x2="140" y2="150" stroke="#ff6b6b" stroke-width="4"/>
+                    <!-- 3. Left Arm -->
+                    <line id="part-2" class="body-part" x1="140" y1="100" x2="110" y2="130" stroke="#ff6b6b" stroke-width="4"/>
+                    <!-- 4. Right Arm -->
+                    <line id="part-3" class="body-part" x1="140" y1="100" x2="170" y2="130" stroke="#ff6b6b" stroke-width="4"/>
+                    <!-- 5. Left Leg -->
+                    <line id="part-4" class="body-part" x1="140" y1="150" x2="110" y2="190" stroke="#ff6b6b" stroke-width="4"/>
+                    <!-- 6. Right Leg -->
+                    <line id="part-5" class="body-part" x1="140" y1="150" x2="170" y2="190" stroke="#ff6b6b" stroke-width="4"/>
+                </svg>
+            </div>
+
+            <!-- Display Wrong Guesses Counter -->
+            <div class="game-info">
+                Incorrect Guesses: <span id="wrong-count">0</span> / 6
+            </div>
+
+            <!-- The container for displaying the word dynamically -->
+            <div class="word-container" id="word-container">
+                <!-- Javascript will inject letter boxes here -->
+            </div>
+        </main>
+
+        <!-- The On-Screen Virtual Keyboard wrapper -->
+        <section class="keyboard-container" id="keyboard-container">
+            <!-- Javascript will inject A-Z buttons here -->
+        </section>
+
+        <!-- Tooltip hint just like the original Python version -->
+        <p class="restart-hint">Press any letter to guess • Press <strong>Space</strong> to restart</p>
+
+        <!-- Game Over Modal (Hidden by default) -->
+        <div class="overlay hidden" id="overlay">
+            <div class="modal">
+                <h2 id="modal-title">Game Over!</h2>
+                <p id="modal-message">The word was: <span id="target-word"></span></p>
+                <button id="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import our game logic -->
+    <script src="script.js"></script>
+</body>
+</html>
